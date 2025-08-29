@@ -7,10 +7,34 @@ services:
       - "8084:8000"
     environment:
       - DEBUG=True
+      - DJANGO_RUNNING_MIGRATIONS=True
+    depends_on:
+      - postgres
     volumes:
       - .:/app
     networks:
       - landings-network
+
+  postgres:
+    container_name: service-landings-postgres
+    image: postgres:alpine
+    ports:
+      - "5445:5432"
+    environment:
+      - POSTGRES_DB=landings_db
+      - POSTGRES_USER=landings_user
+      - POSTGRES_PASSWORD=landings_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - landings-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U landings_user -d landings_db"]
+      interval: 10s
+      retries: 5
+
+volumes:
+  postgres_data:
 
 networks:
   landings-network:

@@ -5,3 +5,5 @@ python-decouple==3.8
 pytest==7.4.3
 pytest-django==4.7.0
 gunicorn==21.2.0
+drf-yasg==1.21.7
+psycopg2-binary==2.9.7
