@@ -53,11 +53,11 @@ class ProductLanding(models.Model):
     """Modelo para la relación entre productos y plantillas de landing"""
     
     LANDING_TYPES = [
-        ('default', 'Landing por Defecto'),
-        ('promotional', 'Landing Promocional'),
-        ('seasonal', 'Landing Estacional'),
-        ('category', 'Landing por Categoría'),
-        ('custom', 'Landing Personalizada'),
+        ('single_flash_offer', 'Producto Único / Oferta Flash'),
+        ('prelaunch', 'Landing de Preventa'),
+        ('airbnb_templates', 'Plantillas para Airbnb'),
+        ('local_event', 'Landing de Evento Local'),
+        ('peak_season', 'Landing de Temporada Alta'),
     ]
     
     product_id = models.IntegerField(
@@ -72,7 +72,7 @@ class ProductLanding(models.Model):
     landing_type = models.CharField(
         max_length=50,
         choices=LANDING_TYPES,
-        default='custom',
+        default='single_flash_offer',
         help_text="Tipo de landing para este producto"
     )
     is_primary = models.BooleanField(
