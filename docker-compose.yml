@@ -12,7 +12,6 @@ services:
     env_file:
       - .env
     environment:
-      - ENVIRONMENT=${ENVIRONMENT}
       - DEBUG=True
       - DJANGO_RUNNING_MIGRATIONS=True
     depends_on:

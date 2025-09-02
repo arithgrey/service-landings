@@ -8,10 +8,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-# Copia el script de entrada al contenedor
+
 COPY entrypoint.sh /app/entrypoint.sh
 
-# Asegura que el script tenga permisos de ejecución
 RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 8080
