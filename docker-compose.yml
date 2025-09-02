@@ -1,11 +1,18 @@
 version: '3.8'
 
 services:
-  service-landings:
-    build: .
+  microservice_enid:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${SERVICENAME}_service
+    container_name: ${SERVICENAME}_service
     ports:
-      - "8084:8000"
+      - "8088:8080"
+    env_file:
+      - .env
     environment:
+      - ENVIRONMENT=${ENVIRONMENT}
       - DEBUG=True
       - DJANGO_RUNNING_MIGRATIONS=True
     depends_on:
@@ -13,7 +20,8 @@ services:
     volumes:
       - .:/app
     networks:
-      - landings-network
+      - backend
+      - enid_service_network
 
   postgres:
     container_name: service-landings-postgres
@@ -27,7 +35,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - landings-network
+      - backend
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U landings_user -d landings_db"]
       interval: 10s
@@ -37,5 +45,7 @@ volumes:
   postgres_data:
 
 networks:
-  landings-network:
+  backend:
+    driver: bridge
+  enid_service_network:
     driver: bridge

@@ -8,10 +8,13 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+# Copia el script de entrada al contenedor
+COPY entrypoint.sh /app/entrypoint.sh
 
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
+# Asegura que el script tenga permisos de ejecución
+RUN chmod +x /app/entrypoint.sh
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Configura el entrypoint para ejecutar las migraciones y levantar el servidor
+ENTRYPOINT ["/app/entrypoint.sh"]
