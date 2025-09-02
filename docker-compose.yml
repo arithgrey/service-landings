@@ -47,4 +47,4 @@ networks:
   backend:
     driver: bridge
   enid_service_network:
-    driver: bridge
+    external: true
