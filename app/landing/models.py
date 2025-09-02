@@ -51,13 +51,6 @@ class LandingTemplate(models.Model):
 class ProductLanding(models.Model):
     """Modelo para la relación entre productos y plantillas de landing"""
     
-    LANDING_TYPES = [
-        ('default', 'Landing por Defecto'),
-        ('promotional', 'Landing Promocional'),
-        ('seasonal', 'Landing Estacional'),
-        ('category', 'Landing por Categoría'),
-        ('custom', 'Landing Personalizada'),
-    ]
     
     product_id = models.IntegerField(
         help_text="ID del producto en el servicio enid-store"
@@ -67,12 +60,6 @@ class ProductLanding(models.Model):
         on_delete=models.CASCADE,
         related_name='product_landings',
         help_text="Plantilla de landing asociada al producto"
-    )
-    landing_type = models.CharField(
-        max_length=50,
-        choices=LANDING_TYPES,
-        default='custom',
-        help_text="Tipo de landing para este producto"
     )
     is_primary = models.BooleanField(
         default=False,
@@ -95,7 +82,6 @@ class ProductLanding(models.Model):
             models.Index(fields=['template']),
             models.Index(fields=['is_primary']),
             models.Index(fields=['is_active']),
-            models.Index(fields=['landing_type']),
         ]
     
     def __str__(self):
