@@ -42,7 +42,7 @@ def readiness_view(request):
 
 
 urlpatterns = [
-    path('api/landings/', include(router.urls)),
+    path('landings/', include(router.urls)),
     path('health', health_view),
     path('liveness', liveness_view),
     path('readiness', readiness_view),
