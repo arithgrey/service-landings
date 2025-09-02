@@ -104,25 +104,3 @@ class ProductLandingViewSet(viewsets.ModelViewSet):
         product_landings = self.get_queryset().filter(is_primary=True)
         serializer = self.get_serializer(product_landings, many=True)
         return Response(serializer.data)
-    
-    @action(detail=False, methods=["get"])
-    def by_type(self, request):
-        """Obtiene relaciones por tipo de landing"""
-        landing_type = request.query_params.get('type')
-        if not landing_type:
-            return Response(
-                {"error": "type es requerido"}, 
-                status=status.HTTP_400_BAD_REQUEST
-            )
-        
-        product_landings = self.get_queryset().filter(landing_type=landing_type)
-        serializer = self.get_serializer(product_landings, many=True)
-        return Response(serializer.data)
-    
-    @action(detail=False, methods=["get"])
-    def landing_types(self, request):
-        """Obtiene las opciones válidas de landing_type"""
-        from .models import ProductLanding
-        field = ProductLanding._meta.get_field('landing_type')
-        choices = [{"value": choice[0], "label": choice[1]} for choice in field.choices]
-        return Response({"landing_types": choices})

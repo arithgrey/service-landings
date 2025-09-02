@@ -67,7 +67,6 @@ def create_default_templates(sender, **kwargs):
         product_id=123,
         template=deportes_template,
         defaults={
-            "landing_type": "default",
             "is_primary": True
         }
     )
@@ -77,35 +76,33 @@ def create_default_templates(sender, **kwargs):
     else:
         print(f"Relación existente: Producto 123 - Plantilla Deportes (Principal)")
     
-    # Relación 2: Producto 456 con plantilla Deportes (promocional)
+    # Relación 2: Producto 456 con plantilla Deportes (no principal)
     product_landing_2, created = ProductLanding.objects.get_or_create(
         product_id=456,
         template=deportes_template,
         defaults={
-            "landing_type": "promotional",
             "is_primary": False
         }
     )
     
     if created:
-        print(f"Relación creada: Producto 456 - Plantilla Deportes (Promocional)")
+        print(f"Relación creada: Producto 456 - Plantilla Deportes (No principal)")
     else:
-        print(f"Relación existente: Producto 456 - Plantilla Deportes (Promocional)")
+        print(f"Relación existente: Producto 456 - Plantilla Deportes (No principal)")
     
-    # Relación 3: Producto 789 con plantilla Testimonios (estacional)
+    # Relación 3: Producto 789 con plantilla Testimonios (no principal)
     product_landing_3, created = ProductLanding.objects.get_or_create(
         product_id=789,
         template=testimonios_template,
         defaults={
-            "landing_type": "seasonal",
             "is_primary": False
         }
     )
     
     if created:
-        print(f"Relación creada: Producto 789 - Plantilla Testimonios (Estacional)")
+        print(f"Relación creada: Producto 789 - Plantilla Testimonios (No principal)")
     else:
-        print(f"Relación existente: Producto 789 - Plantilla Testimonios (Estacional)")
+        print(f"Relación existente: Producto 789 - Plantilla Testimonios (No principal)")
     
     print(f"Total relaciones producto-plantilla: {ProductLanding.objects.count()}")
     print("✅ Relaciones producto-plantilla configuradas correctamente")

@@ -30,7 +30,7 @@ class ProductLandingSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductLanding
         fields = [
-            'id', 'product_id', 'template', 'template_id', 'landing_type',
+            'id', 'product_id', 'template', 'template_id',
             'is_primary', 'is_active', 'full_url_example', 'created_at', 'updated_at'
         ]
         read_only_fields = ['id', 'created_at', 'updated_at']
