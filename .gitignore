@@ -64,7 +64,7 @@ static/
 *.pyo
 *.pyd
 __pycache__/
-
+app/__pycache__/
 # Ignore the virtual environment
 venv/
 
