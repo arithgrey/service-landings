@@ -8,11 +8,12 @@ services:
     image: ${SERVICENAME}_service
     container_name: ${SERVICENAME}_service
     ports:
-      - "8088:8080"
+      - "127.0.0.1:8088:8080"
     env_file:
       - .env
     environment:
-      - DEBUG=True
+      # Único interruptor dev/prod (ver app/settings.py). Default dev local.
+      - APP_ENV=${APP_ENV:-dev}
       - DJANGO_RUNNING_MIGRATIONS=True
     depends_on:
       - postgres
@@ -26,7 +27,7 @@ services:
     container_name: service-landings-postgres
     image: postgres:alpine
     ports:
-      - "5445:5432"
+      - "127.0.0.1:5445:5432"
     environment:
       - POSTGRES_DB=landings_db
       - POSTGRES_USER=landings_user
